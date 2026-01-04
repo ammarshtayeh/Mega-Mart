@@ -16,7 +16,7 @@ export default function useDailyEssentials() {
           id: p.id,
           title: p.title || "",
           image: p.thumbnail || "",
-          discountText: p.discountPercentage ? `${p.discountPercentage}% OFF` : "UP to 50% OFF", // As per design requirement
+          discountText: p.discountPercentage ? `${p.discountPercentage}% OFF` : "UP to 50% OFF", 
         }));
         setProducts(mapped);
       } catch (err) {
