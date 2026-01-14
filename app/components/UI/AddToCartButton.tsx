@@ -9,24 +9,28 @@ export default function AddToCartButton({
   variant = "primary", 
   showIcon = false,
   className = "",
-  label = "Add to Cart"
+  label = "Add to Cart",
+  disabled = false
 }: AddToCartButtonProps) {
   
   const baseClasses = "transition-all duration-300 flex items-center justify-center gap-2";
   
   const variants = {
-    primary: "bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm h-9 min-w-[100px]",
-    detail: "w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0"
+    primary: "bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm h-9 min-w-[100px] disabled:bg-gray-300 disabled:cursor-not-allowed",
+    detail: "w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0 disabled:bg-gray-300 disabled:transform-none disabled:shadow-none disabled:cursor-not-allowed"
   };
+
+  const displayLabel = disabled ? (variant === "detail" ? "Out of Stock" : "Unavailable") : label;
 
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       className={`${baseClasses} ${variants[variant]} ${className}`}
-      aria-label={label}
+      aria-label={displayLabel}
     >
-      {showIcon && <ShoppingCartIcon className={variant === 'detail' ? "w-6 h-6" : "w-4 h-4"} />}
-      {label}
+      {showIcon && !disabled && <ShoppingCartIcon className={variant === 'detail' ? "w-6 h-6" : "w-4 h-4"} />}
+      {displayLabel}
     </button>
   );
 }

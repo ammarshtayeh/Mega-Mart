@@ -1,6 +1,6 @@
 "use client";
 
-import useSlider from "../hooks/useSlider";
+import useSlider from "../hooks/use-slider";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { slides } from "@/app/utils/mock-slides";
 import Image from "next/image";

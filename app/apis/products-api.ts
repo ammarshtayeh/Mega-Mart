@@ -1,7 +1,7 @@
 import { Product } from "../types";
 
 export async function fetchProducts(
-  url = "https://dummyjson.com/products"
+  url = "https://dummyjson.com/products?limit=0"
 ): Promise<Product[]> {
   try {
     const res = await fetch(url);
@@ -15,8 +15,8 @@ export async function fetchProducts(
     const discount = p.discountPercentage || 0;
     const discountedTotal = discount ? price * (1 - discount / 100) : price;
     const thumbnail = p.thumbnail || (p.images && p.images[0]) || undefined;
-const RATING = p.rating || 0;
-const stock = p.stock || 0;
+    const rating = p.rating || 0;
+    const stock = p.stock || 0;
     let secondImage =
       (p.images && p.images[1]) ||
       p.thumbnail ||
@@ -49,7 +49,7 @@ const stock = p.stock || 0;
       total: price,
       discountPercentage: discount,
       discountedTotal,
-      rating: RATING,
+      rating,
       stock,
     };
   });
@@ -74,7 +74,18 @@ export async function fetchProduct(id: number | string) {
 }
 
 export async function fetchProductsByCategory(category: string): Promise<Product[]> {
-  return fetchProducts(`https://dummyjson.com/products/category/${category}`);
+  return fetchProducts(`https://dummyjson.com/products/category/${category}?limit=0`);
+}
+
+export async function fetchCategoryList(): Promise<string[]> {
+  try {
+    const res = await fetch("https://dummyjson.com/products/category-list");
+    if (!res.ok) throw new Error("Failed to fetch categories");
+    return res.json();
+  } catch (err) {
+    console.error("fetchCategoryList error:", err);
+    return [];
+  }
 }
 
 export default fetchProducts;

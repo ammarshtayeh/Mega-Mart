@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import fetchProducts from '../../apis/api';
+import fetchProducts from '../../apis/products-api';
 import { Product, ProductCard } from '../../types';
 
 interface ProductsState {
@@ -41,10 +41,13 @@ export const fetchProductsAsync = createAsyncThunk(
           imageSrc: p.thumbnail || '',
           secondImage: p.secondImage || p.thumbnail || '',
           imageAlt: p.title || '',
-          price: `$${priceNum.toFixed(2)}`,
-          originalPrice: `$${originalNum.toFixed(2)}`,
-          save: `$${saveNum.toFixed(2)}`,
+          price: priceNum,
+          originalPrice: originalNum,
+          save: saveNum,
           discount: `${discount.toFixed(2)}% OFF`,
+          stock: p.stock || 0,
+          description: p.description || '',
+          category: p.category || '',
         };
       } else {
         
@@ -54,10 +57,13 @@ export const fetchProductsAsync = createAsyncThunk(
           imageSrc: p.thumbnail || '',
           secondImage: p.secondImage || p.thumbnail || '',
           imageAlt: p.title || '',
-          price: `$${priceNum.toFixed(2)}`,
+          price: priceNum,
           originalPrice: null,
-          save: '',
+          save: 0,
           discount: '',
+          stock: p.stock || 0,
+          description: p.description || '',
+          category: p.category || '',
         };
       }
     });

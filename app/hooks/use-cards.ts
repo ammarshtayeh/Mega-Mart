@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchProductsAsync } from '../store/slices/productsSlice';
 import { addToCart as addToCartAction, updateQuantity as updateQuantityAction } from '../store/slices/cartSlice';
+import { ProductCard } from '../types';
 
 export default function useCards() {
   const dispatch = useAppDispatch();
@@ -22,14 +23,27 @@ export default function useCards() {
     }
   }, [dispatch, items.length, loading]);
 
-  function addToCart(id: number | string, quantity: number = 1) {
-    const product = items.find(item => item.id === id);
-    if (product) {
-      dispatch(addToCartAction({ ...product, quantity }));
+  const PLACEHOLDER_IMAGE = "https://placehold.co/600x600/f3f4f6/374151?text=No+Image";
+
+  function addToCart(product: ProductCard, quantity: number = 1) {
+    const currentQuantity = cartCounts[Number(product.id)] || 0;
+    if (currentQuantity + quantity > product.stock) {
+      console.warn("Cannot add more items than available in stock");
+      return;
     }
+    dispatch(addToCartAction({ 
+      ...product, 
+      quantity,
+      imageSrc: product.imageSrc || PLACEHOLDER_IMAGE,
+      name: product.name || ''
+    }));
   }
 
-  function updateQuantity(id: number | string, quantity: number) {
+  function updateQuantity(id: number | string, quantity: number, stockLimit?: number) {
+    if (stockLimit !== undefined && quantity > stockLimit) {
+      console.warn("Cannot exceed stock limit");
+      return;
+    }
     dispatch(updateQuantityAction({ id, quantity }));
   }
 

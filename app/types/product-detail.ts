@@ -15,13 +15,14 @@ export interface ProductInfoProps {
   brand?: string;
   title: string;
   rating?: number;
-  reviewsCount: number;
+  reviewsCount?: number;
   price: number;
   discounted: number;
   discount: number;
   description?: string;
   currentCount: number;
-  onAddToCart: (quantity: number) => void;
+  stock?: number;
+  onAddToCart: (quantity?: number) => void;
   onIncrease: () => void;
   onDecrease: () => void;
 }

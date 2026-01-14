@@ -1,10 +1,13 @@
 "use client";
 import React from 'react';
-import useCarts from '../hooks/useCards';
+import useCards from "../hooks/use-cards";
 import CardItem from './Card/Card';
 import SkeletonCard from './skeleton/SkeletonCard';
+import { useRouter } from "next/navigation";
+
 export default function Cards() {
-  const { items, hoveredId, setHoveredId, showAll, toggleShowAll, cartCounts, addToCart, updateQuantity, loading } = useCarts();
+  const { items, hoveredId, setHoveredId, cartCounts, addToCart, updateQuantity, loading } = useCards();
+  const router = useRouter();
 
   return (
     <div className="bg-white">
@@ -17,10 +20,10 @@ export default function Cards() {
             <div className="mt-2 h-1 w-40 bg-blue-300 rounded" />
           </div>
           <button
-            onClick={toggleShowAll}
+            onClick={() => router.push('/products')}
             className="text-sm text-gray-500 hover:text-blue-500 flex items-center gap-2"
           >
-            {showAll ? 'View Some' : 'View All'} <span className="text-blue-500">{showAll ? '<' : '>'}</span>
+            View All Products <span className="text-blue-500">&gt;</span>
           </button>
         </div>
 
@@ -33,9 +36,9 @@ export default function Cards() {
             ))}
           </div>
         ) : (
-          <div className={showAll ? '' : 'py-6'}>
+          <div className="py-6">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {(showAll ? items : items.slice(0, 4)).map((product) => (
+              {items.slice(0, 4).map((product) => (
                 <div key={product.id}>
                   <CardItem
                     product={product}
@@ -54,4 +57,3 @@ export default function Cards() {
     </div>
   );
 }
-  

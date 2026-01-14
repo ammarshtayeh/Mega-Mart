@@ -14,8 +14,8 @@ export default function Page() {
 
       <DisplayCards />
       <CategorySection />
-        <TopElectronicsBrands loading={true}/>
-        <DailyEssentials loading={true} />
+        <TopElectronicsBrands />
+        <DailyEssentials  />
 <Footer/>
     </main>
   );

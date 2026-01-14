@@ -17,18 +17,18 @@ export default function ProductReviews({ reviews }: ProductReviewsProps) {
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  {}
+                  
                   <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs">
                     {review.reviewerName ? review.reviewerName.charAt(0).toUpperCase() : "U"}
                   </div>
                   
                   <div>
-                    {}
+                    
                     <p className="text-sm font-bold text-gray-900">
                       {review.reviewerName || "Anonymous"}
                     </p>
                     
-                    {}
+                    
                     <div className="flex text-yellow-400 text-xs">
                       {Array.from({ length: 5 }).map((_, starIndex) => (
                         <svg 
@@ -47,13 +47,13 @@ export default function ProductReviews({ reviews }: ProductReviewsProps) {
                   </div>
                 </div>
                 
-                {}
+                
                 <span className="text-xs text-gray-400">
                   {review.date ? new Date(review.date).toLocaleDateString() : ""}
                 </span>
               </div>
               
-              {}
+              
               <p className="text-gray-600 text-sm italic">"{review.comment}"</p>
             </div>
           ))

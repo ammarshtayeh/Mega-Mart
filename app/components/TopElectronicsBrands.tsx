@@ -2,12 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import { BRANDS } from '../utils/mock-brands';
 import TopElectronicsBrandsSkeleton from './skeleton/TopElectronicsBrandsSkeleton';
+import { TopElectronicsBrandsProps } from '../types/ui';
 
-interface TopElectronicsBrandsProps {
-  loading?: boolean;
-}
-
-export default function TopElectronicsBrands({ loading }: TopElectronicsBrandsProps) {
+export default function TopElectronicsBrands({ loading = false }: TopElectronicsBrandsProps) {
   if (loading) {
     return <TopElectronicsBrandsSkeleton />;
   }

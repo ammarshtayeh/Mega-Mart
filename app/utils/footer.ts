@@ -1,5 +1,5 @@
-export const FOOTER_LINKS = {
-  CATEGORIES: [
+export const footerLinks = {
+  categories: [
     { name: 'Staples', href: '#' },
     { name: 'Beverages', href: '#' },
     { name: 'Personal Care', href: '#' },
@@ -9,7 +9,7 @@ export const FOOTER_LINKS = {
     { name: 'Snacks & Foods', href: '#' },
     { name: 'Dairy & Bakery', href: '#' },
   ],
-  CUSTOMER_SERVICE: [
+  customerService: [
     { name: 'About Us', href: '#' },
     { name: 'Terms & Conditions', href: '#' },
     { name: 'FAQ', href: '#' },
@@ -19,7 +19,7 @@ export const FOOTER_LINKS = {
   ],
 };
 
-export const CONTACT_INFO = {
+export const contactInfo = {
   whatsapp: '0595537190 ',
   phone: '0595537190 ',
 };

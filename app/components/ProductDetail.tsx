@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import useProduct from "../hooks/useProduct";
+import useProduct from "../hooks/use-product";
 import useProductDetail from "../hooks/useProductDetail";
 import Header from "./Header";
 import ProductDetailSkeleton from "./skeleton/ProductDetailSkeleton";
@@ -8,6 +8,7 @@ import ProductGallery from "./ProductDetail/ProductGallery";
 import ProductInfo from "./ProductDetail/ProductInfo";
 import ProductSpecs from "./ProductDetail/ProductSpecs";
 import ProductReviews from "./ProductDetail/ProductReviews";
+import Breadcrumb from "./UI/Breadcrumb";
 import { ProductDetailProps } from "../types/product-detail";
 
 export default function ProductDetail({ id }: ProductDetailProps) {
@@ -32,16 +33,22 @@ export default function ProductDetail({ id }: ProductDetailProps) {
       <Header />
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumb 
+            items={[
+              { name: product.category, href: `/category/${product.category}` },
+              { name: product.title }
+            ]} 
+          />
           <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-              {}
+
               <ProductGallery
                 images={product.images || []}
                 title={product.title || ""}
                 thumbnail={product.thumbnail || ""}
               />
 
-              {}
+
               <div className="flex flex-col">
                 <ProductInfo
                   category={product.category}
@@ -54,12 +61,13 @@ export default function ProductDetail({ id }: ProductDetailProps) {
                   discount={discount}
                   description={product.description}
                   currentCount={currentCount}
+                  stock={product.stock}
                   onAddToCart={handleAddToCart}
                   onIncrease={handleIncrease}
                   onDecrease={handleDecrease}
                 />
 
-                {}
+
                 <div className="px-8 lg:px-12">
                   <ProductSpecs
                     availabilityStatus={product.availabilityStatus}
@@ -70,7 +78,7 @@ export default function ProductDetail({ id }: ProductDetailProps) {
               </div>
             </div>
 
-            {}
+
             <ProductReviews reviews={product.reviews} />
           </div>
         </div>

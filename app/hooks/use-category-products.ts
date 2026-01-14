@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Product, ProductCard } from "../types";
-import { fetchProductsByCategory } from "../apis/api";
+import { fetchProductsByCategory } from "../apis/products-api";
+
+const PLACEHOLDER_IMAGE = "https://placehold.co/600x600/f3f4f6/374151?text=No+Image";
 
 export default function useCategoryProducts(category: string) {
   const [products, setProducts] = useState<ProductCard[]>([]);
@@ -21,13 +23,14 @@ export default function useCategoryProducts(category: string) {
           return {
             id: p.id,
             name: p.title || "",
-            imageSrc: p.thumbnail || "",
-            secondImage: p.secondImage || p.thumbnail || "",
+            imageSrc: p.thumbnail || PLACEHOLDER_IMAGE,
+            secondImage: p.secondImage || p.thumbnail || PLACEHOLDER_IMAGE,
             imageAlt: p.title || "",
-            price: `$${priceNum.toFixed(2)}`,
-            originalPrice: discount > 0 ? `$${originalNum.toFixed(2)}` : null,
-            save: discount > 0 ? `$${saveNum.toFixed(2)}` : "",
+            price: priceNum,
+            originalPrice: discount > 0 ? originalNum : null,
+            save: discount > 0 ? saveNum : 0,
             discount: discount > 0 ? `${discount.toFixed(2)}% OFF` : "",
+            stock: p.stock || 0,
           };
         });
         setProducts(mapped);

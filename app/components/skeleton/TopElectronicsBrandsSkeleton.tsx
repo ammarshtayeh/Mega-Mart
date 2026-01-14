@@ -14,7 +14,7 @@ export default function TopElectronicsBrandsSkeleton() {
           <Skeleton width={80} height={20} />
         </div>
 
-        {}
+
         <div className="flex gap-8 overflow-x-auto pb-6 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
           {Array.from({ length: 4 }).map((_, i) => (
             <div

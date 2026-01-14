@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { Product } from '../types';
-import { fetchProduct } from '../apis/api';
+import { fetchProduct } from '../apis/products-api';
 export default function useProduct(id?: string) {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);

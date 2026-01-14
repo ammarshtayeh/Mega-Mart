@@ -1,17 +1,16 @@
 "use client";
 import React from 'react';
 import Image from 'next/image';
-import useDailyEssentials from '../hooks/useDailyEssentials';
+import useDailyEssentials from "../hooks/use-daily-essentials";
 import { DailyEssentialProduct } from '../types';
 import DailyEssentialsSkeleton from './skeleton/DailyEssentialsSkeleton';
+import { DailyEssentialsProps } from '../types/ui';
 
-interface DailyEssentialsProps {
-  loading?: boolean;
-}
 
-export default function DailyEssentials({ loading: externalLoading }: DailyEssentialsProps) {
+
+export default function DailyEssentials({ loading: externalLoading = false }: DailyEssentialsProps) {
   const { products, loading: hookLoading } = useDailyEssentials();
-  const isLoading = externalLoading !== undefined ? externalLoading : hookLoading;
+  const isLoading = externalLoading || hookLoading;
 
   if (isLoading) {
     return <DailyEssentialsSkeleton />;

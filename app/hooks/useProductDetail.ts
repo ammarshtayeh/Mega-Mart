@@ -12,6 +12,8 @@ interface UseProductDetailReturn {
   handleDecrease: () => void;
 }
 
+const PLACEHOLDER_IMAGE = "https://placehold.co/600x600/f3f4f6/374151?text=No+Image";
+
 export default function useProductDetail(product: Product | null): UseProductDetailReturn {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state.cart.items);
@@ -31,6 +33,11 @@ export default function useProductDetail(product: Product | null): UseProductDet
   const handleAddToCart = (quantity: number = 1) => {
     if (!product) return;
     
+    if (currentCount + quantity > (product.stock || 0)) {
+      console.warn("Cannot add more items than available in stock");
+      return;
+    }
+
     const priceNum = product.price || 0;
     const discountVal = product.discountPercentage || 0;
     const originalNum = discountVal ? (priceNum / (1 - discountVal / 100)) : priceNum;
@@ -39,32 +46,37 @@ export default function useProductDetail(product: Product | null): UseProductDet
     dispatch(addToCart({
       id: product.id,
       name: product.title || product.name || '',
-      imageSrc: product.thumbnail || (product.images && product.images[0]) || '',
-      secondImage: product.secondImage || product.thumbnail || '',
+      imageSrc: product.thumbnail || (product.images && product.images[0]) || PLACEHOLDER_IMAGE,
+      secondImage: product.secondImage || product.thumbnail || PLACEHOLDER_IMAGE,
       imageAlt: product.title || '',
-      price: `$${priceNum.toFixed(2)}`,
-      originalPrice: originalNum ? `$${originalNum.toFixed(2)}` : null,
-      save: `$${saveNum.toFixed(2)}`,
+      price: priceNum,
+      originalPrice: originalNum || null,
+      save: saveNum,
       discount: discountVal ? `${discountVal.toFixed(2)}% OFF` : '',
       quantity: quantity,
+      stock: product.stock,
     }));
   };
 
   const handleIncrease = () => {
     if (!product) return;
-    dispatch(updateQuantity({ id: product.id, quantity: currentCount + 1 }));
+    const nextCount = currentCount + 1;
+    if (nextCount <= (product.stock || 0)) {
+      dispatch(updateQuantity({ id: product.id, quantity: nextCount }));
+    }
   };
 
   const handleDecrease = () => {
-    if (!product) return;
-    dispatch(updateQuantity({ id: product.id, quantity: currentCount - 1 }));
+    if (product && currentCount > 0) {
+      dispatch(updateQuantity({ id: product.id, quantity: currentCount - 1 }));
+    }
   };
 
   return {
     currentCount,
-    price,
+    price: Number(price.toFixed(2)),
     discount,
-    discounted,
+    discounted: Number(discounted.toFixed(2)),
     handleAddToCart,
     handleIncrease,
     handleDecrease,

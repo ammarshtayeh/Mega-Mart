@@ -1,6 +1,5 @@
-"use client";
 import React from 'react';
-import { FOOTER_LINKS, CONTACT_INFO } from '../utils/footer';
+import { footerLinks, contactInfo } from '../utils/footer';
 import { PhoneIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
 export default function Footer() {
@@ -27,7 +26,7 @@ MegaMart            </h2>
                     </div>
                     <div>
                       <p className="text-sm text-blue-100/70">Whats App</p>
-                      <p className="text-white font-medium">{CONTACT_INFO.whatsapp}</p>
+                      <p className="text-white font-medium">{contactInfo.whatsapp}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 group">
@@ -36,7 +35,7 @@ MegaMart            </h2>
                     </div>
                     <div>
                       <p className="text-sm text-blue-100/70">Call Us</p>
-                      <p className="text-white font-medium">{CONTACT_INFO.phone}</p>
+                      <p className="text-white font-medium">{contactInfo.phone}</p>
                     </div>
                   </div>
                 </div>
@@ -71,7 +70,7 @@ MegaMart            </h2>
           <div>
             <h3 className="text-xl font-bold mb-8 border-b-2 border-white/30 w-fit pb-2">Most Popular Categories</h3>
             <ul className="space-y-4">
-              {FOOTER_LINKS.CATEGORIES.map((link) => (
+              {footerLinks.categories.map((link) => (
                 <li key={link.name}>
                   <a href={link.href} className="text-blue-50 hover:text-white transition-colors text-base flex items-center gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
@@ -85,7 +84,7 @@ MegaMart            </h2>
           <div>
             <h3 className="text-xl font-bold mb-8 border-b-2 border-white/30 w-fit pb-2">Customer Services</h3>
             <ul className="space-y-4">
-              {FOOTER_LINKS.CUSTOMER_SERVICE.map((link) => (
+              {footerLinks.customerService.map((link) => (
                 <li key={link.name}>
                   <a href={link.href} className="text-blue-50 hover:text-white transition-colors text-base flex items-center gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-white/40" />

@@ -1,14 +1,14 @@
 "use client";
 import React from "react";
 import CardItem from "./Card/Card";
-import useCarts from "../hooks/useCards";
-import useCategoryProducts from "../hooks/useCategoryProducts";
 import CategoryProductsSkeleton from "./skeleton/CategoryProductsSkeleton";
+import useCategoryProducts from "../hooks/use-category-products";
+import useCards from "../hooks/use-cards";
 import { CategoryProductsProps } from "../types/CategoryProducts.types";
 
 export default function CategoryProducts({ category }: CategoryProductsProps) {
   const { products, loading } = useCategoryProducts(category);
-  const { hoveredId, setHoveredId, addToCart, updateQuantity, cartCounts } = useCarts();
+  const { hoveredId, setHoveredId, addToCart, updateQuantity, cartCounts } = useCards();
 
   if (loading) {
     return <CategoryProductsSkeleton />;

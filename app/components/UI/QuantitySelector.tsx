@@ -10,6 +10,7 @@ export default function QuantitySelector({
   count,
   variant = "primary",
   className = "",
+  isMaxReached = false,
 }: QuantitySelectorProps) {
   return (
     <div
@@ -19,9 +20,10 @@ export default function QuantitySelector({
     >
       <button
         onClick={onDecrease}
+        disabled={count <= 1}
         className={`${
           variant === "detail" ? "p-4" : "px-3 py-1"
-        } hover:bg-blue-100 text-blue-600 transition-colors flex items-center justify-center`}
+        } hover:bg-blue-100 text-blue-600 disabled:text-gray-300 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-colors flex items-center justify-center`}
         aria-label="Decrease quantity"
       >
         <MinusIcon
@@ -37,9 +39,10 @@ export default function QuantitySelector({
       </span>
       <button
         onClick={onIncrease}
+        disabled={isMaxReached}
         className={`${
           variant === "detail" ? "p-4" : "px-3 py-1"
-        } hover:bg-blue-100 text-blue-600 transition-colors flex items-center justify-center`}
+        } hover:bg-blue-100 text-blue-600 disabled:text-gray-300 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-colors flex items-center justify-center`}
         aria-label="Increase quantity"
       >
         <PlusIcon

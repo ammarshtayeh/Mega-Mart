@@ -41,7 +41,7 @@ export default function ProductDetailSkeleton() {
                 </div>
               </div>
 
-              {}
+
               <div className="lg:col-span-2 space-y-4">
                 <section className="bg-white p-4 rounded shadow">
                   <h2 className="font-semibold mb-2"><Skeleton width={100} /></h2>

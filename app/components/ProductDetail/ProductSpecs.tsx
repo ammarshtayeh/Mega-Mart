@@ -1,23 +1,19 @@
 import { ProductSpecsProps } from "../../types/product-detail";
 
 export default function ProductSpecs({
-  availabilityStatus,
-  stock,
-  returnPolicy,
+  availabilityStatus = "Unknown",
+  stock = 0,
+  returnPolicy = "30 days return policy",
 }: ProductSpecsProps) {
-  const getAvailabilityColor = () => {
-    if (availabilityStatus === 'Low Stock') return 'text-red-500';
-    if (stock && stock > 0) return 'text-green-600';
-    return 'text-red-500';
-  };
+  const getAvailabilityColor = () => 
+    availabilityStatus === 'Low Stock' ? 'text-red-500' : (stock > 0 ? 'text-green-600' : 'text-red-500');
 
-  const getAvailabilityText = () => {
-    return availabilityStatus || (stock && stock > 0 ? "In Stock" : "Out of Stock");
-  };
+  const getAvailabilityText = () => 
+    availabilityStatus && availabilityStatus !== "Unknown" ? availabilityStatus : (stock > 0 ? "In Stock" : "Out of Stock");
 
   return (
     <div className="grid grid-cols-2 gap-6 mb-8">
-      {}
+
       <div>
         <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-1">
           Availability
@@ -27,13 +23,13 @@ export default function ProductSpecs({
         </p>
       </div>
 
-      {}
+
       <div>
         <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-1">
           Return Policy
         </h3>
         <p className="text-gray-900 font-medium">
-          {returnPolicy || "30 days return policy"}
+          {returnPolicy}
         </p>
       </div>
     </div>

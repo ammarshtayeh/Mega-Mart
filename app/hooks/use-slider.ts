@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { slides } from '@/app/utils/mock-slides';
 
-export default function useSlider(autoMs = 5000) {
+const DEFAULT_INTERVAL = 5000;
+
+export default function useSlider(autoMs = DEFAULT_INTERVAL) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => {
